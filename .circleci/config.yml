@@ -1,0 +1,73 @@
+version: 2.1
+
+executors:
+  python:
+    docker:
+      - image: circleci/python:3.7.9
+
+jobs:
+  test:
+    executor: python
+    resource_class: medium
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements-dev.txt" }}
+      - run:
+          name: Install (or upgrade) pip
+          command: python3 -m pip install --upgrade pip
+      - run:
+          name: Install dependencies
+          command: python3 -m pip install -r requirements-dev.txt
+      - run:
+          name: Run Black
+          command: black --check . --line-length 99 
+      - run:
+          name: Run Flake8
+          command: flake8 --count
+      - run:
+          name: Run Pytest
+          command: pytest
+      - save_cache:
+          paths:
+            - ./.env
+          key: v1-dependencies-{{ checksum "requirements-dev.txt" }}
+  deploy:
+    executor: python
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Install (or upgrade) pip
+          command: python3 -m pip install --upgrade pip
+      - run:
+          name: Install deployment packages
+          command: python3 -m pip install --upgrade build twine
+      - run:
+          name: Build package
+          command: python3 -m build
+      - run:
+          name: Create .pypirc file
+          command: |
+            echo -e "[pypi]" >> ~/.pypirc
+            echo -e "username = __token__" >> ~/.pypirc
+            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
+      - run:
+          name: Upload package
+          command: python3 -m twine upload dist/*
+
+workflows:
+  test-deploy:
+    jobs:
+        - test
+        - deploy:
+            filters:
+              branches:
+                only:
+                  - master
+              tags:
+                only:
+                  - /v.*/
+            requires:
+              - test
