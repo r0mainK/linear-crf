@@ -6,7 +6,7 @@ This repository hosts my Pytorch implementation of the Linear Conditional Random
 
 ## Origin story
 
-About a year ago I needed this for a project I was working on, and stumbled upon the de facto _official_ implementation (at least by star count), which you can check [here](https://github.com/kmkurn/pytorch-crf). Now although the code was already quite good I decided to optimize it for my needs, and ended up with significant gains. I decided to open a PR in order to share, but quickly realized two thjings. The first was that I had commited way too much, and should have consulted with the author first. The second was that some changes actually went against the wants of the author, as they didn't meet his readability standard. Anyway, long story short I got demotivated, then forgot about it, and the [PR of shame](https://github.com/kmkurn/pytorch-crf/pull/54) is still open >_<"
+About a year ago I needed this for a project I was working on, and stumbled upon the de facto _official_ implementation (at least by star count), which you can check [here](https://github.com/kmkurn/pytorch-crf). Now although the code was already quite good I decided to optimize it for my needs, and ended up with significant gains. I decided to open a PR in order to share, but quickly realized two things. The first was that I had commited way too much, and should have consulted with the author first. The second was that some changes actually went against the wants of the author, as they didn't meet his readability standard. Anyway, long story short I got demotivated, then forgot about it, and the [PR of shame](https://github.com/kmkurn/pytorch-crf/pull/54) is still open >_<"
 
 However the story does not stop here ! As I needed to use a CRF for another project recently, I decided to clean up my code, and ended up optimizing it even further. As I like how it looks, but learned my lesson, I decided to release it, and _voila_ !
 
@@ -70,4 +70,4 @@ All help is welcome, as long as you open an issue beforehand to talk about it :)
 
 ## Reference
 
-[Conditional Random Fields: Probabilistic Modelsfor Segmenting and Labeling Sequence Data](https://repository.upenn.edu/cgi/viewcontent.cgi?article=1162&context=cis_papers) by John Lafferty, Andrew McCallum and Fernando C.N. Pereira
+[Conditional Random Fields: Probabilistic Models for Segmenting and Labeling Sequence Data](https://repository.upenn.edu/cgi/viewcontent.cgi?article=1162&context=cis_papers) by John Lafferty, Andrew McCallum and Fernando C.N. Pereira
