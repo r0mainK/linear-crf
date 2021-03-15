@@ -1,0 +1,15 @@
+# Environments
+**/.env
+
+# VSCode
+.vscode
+
+# Mac
+.DS_Store
+
+# Python
+**/__pycache__
+build
+dist
+*.egg-info
+.coverage
